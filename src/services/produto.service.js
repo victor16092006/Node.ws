@@ -1,9 +1,19 @@
 const Produto = require("../models/produto.model");
 
 const produtos = [
-    { id: 1, nome: "Notebook", preco: 3500 },
-    { id: 2, nome: "Mouse", preco: 120 }
+    new Produto({
+        id: 1,
+        nome: "Notebook",
+        preco: 3500
+    }),
+
+    new Produto({
+        id: 2,
+        nome: "Mouse",
+        preco: 120
+    })
 ];
+
 function listar(nome) {
     if (nome) {
         return produtos.filter(produto =>
@@ -14,12 +24,12 @@ function listar(nome) {
     return produtos;
 }
 
-
 function buscarPorId(id) {
-    return produtos.find(produto => produto.id === Number(id));
+    return produtos.find(
+        produto => produto.id === Number(id)
+    );
 }
 
-// POST /produtos
 function criar(dados) {
     if (!dados.nome || dados.preco == null) {
         throw new Error("nome e preco são obrigatórios");
@@ -36,7 +46,6 @@ function criar(dados) {
     return produto;
 }
 
-// PUT /produtos/:id
 function atualizar(id, dados) {
     const produto = buscarPorId(id);
 
@@ -53,7 +62,6 @@ function atualizar(id, dados) {
 
     return produto;
 }
-
 
 function atualizarParcialmente(id, dados) {
     const produto = buscarPorId(id);
@@ -72,7 +80,6 @@ function atualizarParcialmente(id, dados) {
 
     return produto;
 }
-
 
 function remover(id) {
     const indice = produtos.findIndex(
@@ -96,3 +103,4 @@ module.exports = {
     atualizarParcialmente,
     remover
 };
+

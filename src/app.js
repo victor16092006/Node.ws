@@ -5,6 +5,10 @@ const app = express();
 
 app.use(express.json());
 
+app.get("/", (req, res) => {
+    res.send("API funcionando!");
+});
+
 app.use("/produtos", produtoRoutes);
 
 app.listen(3000, () => {
